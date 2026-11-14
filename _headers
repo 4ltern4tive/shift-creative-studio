@@ -22,6 +22,9 @@
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
 
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
 # ------------------------------------------------------------------
 # Fonts — never change, cache forever
 # ------------------------------------------------------------------
