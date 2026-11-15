@@ -553,6 +553,7 @@ html.no-js .preloader { display: none; }
   letter-spacing: -0.05em;
   max-width: 900px;
   color: var(--white);
+  white-space: pre-line;
 }
 .hero__title .accent { color: var(--lime); }
 .hero__bottom {
