@@ -9,6 +9,11 @@
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* Reduced motion: pause the looped decorative wordmark video (CSS hides it) */
+  if (reduceMotion.matches) {
+    $$('.services__wordmark-video').forEach((video) => video.pause());
+  }
   const finePointer = window.matchMedia('(pointer: fine)');
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 

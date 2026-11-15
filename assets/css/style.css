@@ -225,6 +225,9 @@ html.no-js .preloader { display: none; }
   line-height: 0.7;
   letter-spacing: -0.08em;
   color: var(--lime);
+  font-variant-numeric: tabular-nums;
+  min-width: 3ch;
+  text-align: center;
 }
 .preloader__word {
   font-size: clamp(17px, 1.6vw, 23px);
@@ -1286,16 +1289,28 @@ html.no-js .preloader { display: none; }
 .text-link:hover { color: var(--lime); border-color: var(--lime); }
 .services__wordmark {
   margin-top: clamp(70px, 9vw, 125px);
+}
+.services__wordmark-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 2046 / 298;
+  object-fit: contain;
+}
+.services__wordmark-static {
+  display: none;
   font-size: clamp(48px, 10.3vw, 158px);
   line-height: 0.74;
   letter-spacing: -0.075em;
   color: var(--lime);
   white-space: nowrap;
-  display: flex;
-  align-items: flex-end;
-  gap: 0.05em;
 }
-.services__wordmark span { color: var(--lime); }
+.services__wordmark-static em { font-style: normal; color: var(--lime); }
+@media (prefers-reduced-motion: reduce) {
+  .services__wordmark-video { display: none; }
+  .services__wordmark-static { display: block; }
+}
 
 /* ==========================================================================
    Contact
@@ -1746,7 +1761,6 @@ html.no-js .preloader { display: none; }
   .services__outro { grid-template-columns: 1fr; gap: 32px; }
   .services__meta { align-items: flex-start; text-align: left; }
   .services__statement { font-size: clamp(30px, 5vw, 44px); }
-  .services__wordmark { font-size: clamp(46px, 11vw, 110px); }
   .philosophy { padding-top: 120px; }
   .philosophy__quote { font-size: clamp(38px, 6vw, 58px); }
   .philosophy__inner { min-height: calc(100svh - 120px); }
@@ -1829,7 +1843,7 @@ html.no-js .preloader { display: none; }
   .service-card__label { font-size: 17px; }
   .services__outro { margin-top: 74px; }
   .services__statement { font-size: clamp(27px, 7.1vw, 38px); }
-  .services__wordmark { font-size: clamp(38px, 11.4vw, 80px); margin-top: 60px; }
+  .services__wordmark { margin-top: 60px; }
   .contact { min-height: 82svh; padding-block: 120px; }
   .contact__title { font-size: clamp(36px, 9.2vw, 58px); }
   .contact__paren { font-size: 52vw; top: 43%; color: rgba(255, 255, 255, 0.075); }
@@ -1873,7 +1887,6 @@ html.no-js .preloader { display: none; }
   .services__title { font-size: clamp(43px, 13.3vw, 62px); }
   .service-card__label { font-size: 16px; }
   .service-card__body p { font-size: 18px; }
-  .services__wordmark { font-size: clamp(34px, 11vw, 54px); }
   .philosophy__portfolio { font-size: clamp(42px, 13.2vw, 60px); }
   .contact__title { font-size: clamp(30px, 9.2vw, 40px); }
   .footer-socials { gap: 16px 24px; }
