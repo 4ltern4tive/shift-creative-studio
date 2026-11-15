@@ -776,7 +776,7 @@
       year_unspecified: 'Year not specified',
       manifesto_label: '(About — Manifesto)',
       manifesto_1: 'Creative thinking.',
-      manifesto_2: 'Technology that empowers.',
+      manifesto_2: 'Technology that powers.',
       manifesto_3: 'Design that solves.',
       manifesto_foot: '(Three principles — One practice)',
       skills_eyebrow: '(Capabilities)',
