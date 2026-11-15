@@ -1857,8 +1857,8 @@ html.no-js .preloader { display: none; }
   .scroll-cue__line { width: 20px; }
   .hero__cta { padding-left: 13px; gap: 8px; }
   .hero__cta .pill-btn__arrow { width: 26px; height: 26px; }
-  .works__title,
-  .skills__title { font-size: clamp(48px, 14vw, 62px); }
+  .works__title { font-size: clamp(48px, 14vw, 62px); }
+  .skills__title { font-size: clamp(42px, 13.5vw, 62px); }
   .work-row__name { font-size: 17px; }
   .services__title { font-size: clamp(43px, 13.3vw, 62px); }
   .service-card__label { font-size: 16px; }
