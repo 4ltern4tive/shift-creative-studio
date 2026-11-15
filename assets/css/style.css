@@ -169,6 +169,14 @@ html.has-cursor .cursor { display: grid; }
 .cursor.is-view::before { content: 'VIEW'; }
 .cursor.is-hidden { opacity: 0; }
 
+/* The project dialog opens in the browser top layer, above the page — the
+   custom cursor can never render over it. Use the native pointer there. */
+html.has-cursor.modal-open .cursor { display: none; }
+html.has-cursor.modal-open .project-modal,
+html.has-cursor.modal-open .project-modal * { cursor: auto !important; }
+html.has-cursor.modal-open .project-modal a,
+html.has-cursor.modal-open .project-modal button { cursor: pointer !important; }
+
 /* ==========================================================================
    Preloader
    ========================================================================== */
