@@ -1297,6 +1297,14 @@ html.no-js .preloader { display: none; }
   max-width: 100%;
   aspect-ratio: 2046 / 298;
   object-fit: contain;
+  /* Optically center the artwork on the page: offset half the services left inset */
+  transform: translateX(calc((var(--pad) - clamp(20px, 9vw, 130px)) / 2));
+}
+@media (max-width: 1024px) {
+  .services__wordmark-video { transform: translateX(calc((var(--pad) - clamp(20px, 6vw, 64px)) / 2)); }
+}
+@media (max-width: 900px) {
+  .services__wordmark-video { transform: translateX(0); }
 }
 .services__wordmark-static {
   display: none;
