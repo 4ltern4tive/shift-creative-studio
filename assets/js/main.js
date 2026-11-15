@@ -52,6 +52,7 @@
         window.setTimeout(() => preloader.remove(), 1100);
       }
       initAfterLoad();
+      playHeroReveal();
     }, delay);
   }
 
@@ -724,6 +725,173 @@
   }
 
   /* ------------------------------------------------------------------------
+     Editorial motion
+     Hero: masked line reveal · Manifesto: scrubbed word illumination
+     ------------------------------------------------------------------------ */
+
+  const heroTitleEl = $('#hero-title');
+  const heroLineEls = heroTitleEl ? $$('.hero__line-inner', heroTitleEl) : [];
+  let heroRevealPlayed = false;
+
+  function prepareHeroReveal() {
+    if (!window.gsap || !heroLineEls.length || reduceMotion.matches) return;
+    window.gsap.set(heroLineEls, { y: 56, opacity: 0, filter: 'blur(5px)' });
+  }
+
+  function playHeroReveal() {
+    if (heroRevealPlayed) return;
+    heroRevealPlayed = true;
+    if (!window.gsap || !heroLineEls.length) return;
+    if (reduceMotion.matches) {
+      window.gsap.set(heroLineEls, { clearProps: 'transform,opacity,filter' });
+      return;
+    }
+    window.gsap.timeline({ delay: 0.55, defaults: { ease: 'power3.out' } })
+      .to(heroLineEls, {
+        y: 0,
+        opacity: 1,
+        filter: 'blur(0px)',
+        duration: 1,
+        stagger: 0.15,
+        onComplete: () => window.gsap.set(heroLineEls, { clearProps: 'transform,opacity,filter' })
+      });
+  }
+
+  const manifestoSection = $('#about');
+  const manifestoTitleEl = $('#manifesto-title');
+  const manifestoLineEls = manifestoTitleEl ? $$('.manifesto__line', manifestoTitleEl) : [];
+  const MANIFESTO_DIM = '#3a3a3a';
+  const MANIFESTO_LIGHT = '#f2f2ef';
+  const MANIFESTO_LIME = '#d2f08a';
+  const MANIFESTO_SUP = 'rgba(255, 255, 255, 0.82)';
+  let manifestoWordTargets = [];
+  let manifestoMedia = null;
+  let manifestoTimeline = null;
+  let manifestoColorTween = null;
+  let manifestoEnhanced = false;
+
+  function splitManifestoWords() {
+    const targets = [];
+    manifestoLineEls.forEach((line) => {
+      const textEl = $('[data-i18n]', line);
+      if (!textEl) return;
+      const raw = textEl.textContent;
+      textEl.textContent = '';
+      raw.split(/(\s+)/).forEach((chunk) => {
+        if (!chunk) return;
+        if (/^\s+$/.test(chunk)) {
+          textEl.appendChild(document.createTextNode(chunk));
+          return;
+        }
+        const word = document.createElement('span');
+        word.className = 'manifesto__word';
+        word.textContent = chunk;
+        textEl.appendChild(word);
+        targets.push(word);
+      });
+      const sup = $('sup', line);
+      if (sup) targets.push(sup);
+    });
+    return targets;
+  }
+
+  function addManifestoColorTween() {
+    if (!manifestoTimeline || !window.gsap) return;
+    if (manifestoColorTween) manifestoColorTween.kill();
+    const targets = manifestoWordTargets;
+    if (!targets.length) return;
+    manifestoColorTween = manifestoTimeline.fromTo(
+      targets,
+      { color: MANIFESTO_DIM },
+      {
+        color: (index, el) => {
+          if (el.closest('.manifesto__line--accent')) return MANIFESTO_LIME;
+          return el.tagName === 'SUP' ? MANIFESTO_SUP : MANIFESTO_LIGHT;
+        },
+        duration: 0.55,
+        ease: 'none',
+        stagger: 0.16
+      },
+      0
+    );
+  }
+
+  function refreshManifestoReveal(dict) {
+    if (!manifestoEnhanced) return;
+    let mismatch = false;
+    manifestoLineEls.forEach((line) => {
+      const textEl = $('[data-i18n]', line);
+      if (!textEl) return;
+      const value = dict[textEl.getAttribute('data-i18n')];
+      if (typeof value !== 'string') return;
+      const spans = $$('.manifesto__word', textEl);
+      const words = value.split(/\s+/).filter(Boolean);
+      if (spans.length !== words.length) {
+        mismatch = true;
+        return;
+      }
+      spans.forEach((span, index) => { span.textContent = words[index]; });
+    });
+    if (!mismatch) return;
+
+    // Different word rhythm: rebuild the split and keep the current scroll progress.
+    const progress = manifestoTimeline && manifestoTimeline.scrollTrigger
+      ? manifestoTimeline.scrollTrigger.progress
+      : 0;
+    manifestoLineEls.forEach((line) => {
+      const textEl = $('[data-i18n]', line);
+      if (!textEl) return;
+      const value = dict[textEl.getAttribute('data-i18n')];
+      if (typeof value === 'string') textEl.textContent = value;
+    });
+    manifestoWordTargets = splitManifestoWords();
+    addManifestoColorTween();
+    if (manifestoTimeline && progress) manifestoTimeline.progress(progress);
+    if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+  }
+
+  function initManifestoReveal() {
+    if (!manifestoSection || !manifestoLineEls.length) return;
+    if (!window.gsap || !window.ScrollTrigger || reduceMotion.matches) return;
+    const { gsap, ScrollTrigger } = window;
+    gsap.registerPlugin(ScrollTrigger);
+    manifestoEnhanced = true;
+    manifestoWordTargets = splitManifestoWords();
+
+    manifestoMedia = gsap.matchMedia();
+    manifestoMedia.add(
+      {
+        desktop: '(min-width: 1024px) and (min-height: 700px)',
+        compact: '(max-width: 1023.98px), (max-height: 699.98px)'
+      },
+      (context) => {
+        const desktop = Boolean(context.conditions.desktop);
+        manifestoTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: manifestoSection,
+            start: desktop ? 'top 72px' : 'top 78%',
+            end: desktop ? '+=65%' : 'center 42%',
+            scrub: 0.5,
+            pin: desktop,
+            pinSpacing: desktop,
+            anticipatePin: desktop ? 1 : 0,
+            invalidateOnRefresh: true
+          }
+        });
+        addManifestoColorTween();
+        return () => {
+          manifestoTimeline = null;
+          manifestoColorTween = null;
+        };
+      }
+    );
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+  }
+
+  /* ------------------------------------------------------------------------
      After preloader
      ------------------------------------------------------------------------ */
 
@@ -749,7 +917,8 @@
       descriptor: 'Shift Creative Studio',
       loading: 'Loading / 2026',
       hero_eyebrow: '(Shift Creative Studio)',
-      hero_title: 'Creativity that evolves.\nDesign that connects',
+      hero_title_1: 'Creativity that evolves.',
+      hero_title_2: 'Design that connects',
       scroll: 'Scroll down',
       start_project: 'Start a project',
       nav_home: 'Home',
@@ -863,7 +1032,8 @@
       descriptor: 'Estudio Creativo',
       loading: 'Cargando / 2026',
       hero_eyebrow: '(Estudio Creativo)',
-      hero_title: 'Creatividad que evoluciona.\nDiseño que conecta',
+      hero_title_1: 'Creatividad que evoluciona.',
+      hero_title_2: 'Diseño que conecta',
       scroll: 'Desplázate',
       start_project: 'Iniciar un proyecto',
       nav_home: 'Inicio',
@@ -989,7 +1159,9 @@
     const dict = TRANSLATIONS[currentLang] || TRANSLATIONS[DEFAULT_LANG];
     $$('[data-i18n]').forEach((el) => {
       const value = dict[el.getAttribute('data-i18n')];
-      if (typeof value === 'string') el.textContent = value;
+      if (typeof value !== 'string') return;
+      if (manifestoEnhanced && el.closest('.manifesto__line')) return;
+      el.textContent = value;
     });
     $$('[data-i18n-aria]').forEach((el) => {
       const value = dict[el.getAttribute('data-i18n-aria')];
@@ -1006,6 +1178,7 @@
     if (ogTitle && dict.page_title) ogTitle.setAttribute('content', dict.page_title);
     const ogDesc = document.querySelector('meta[property="og:description"]');
     if (ogDesc && dict.meta_description) ogDesc.setAttribute('content', dict.meta_description);
+    refreshManifestoReveal(dict);
     if (dialog && dialog.open) updateModal(currentProject);
   }
 
@@ -1035,5 +1208,8 @@
   }
 
   initLanguage();
+
+  prepareHeroReveal();
+  initManifestoReveal();
 
 })();

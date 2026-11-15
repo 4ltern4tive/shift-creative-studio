@@ -548,13 +548,21 @@ html.no-js .preloader { display: none; }
 .hero__copy { max-width: 900px; padding-top: 4px; }
 .hero__eyebrow { margin-bottom: clamp(22px, 3vh, 38px); color: rgba(255, 255, 255, 0.55); }
 .hero__title {
+  display: flex;
+  flex-direction: column;
   font-size: clamp(40px, 5vw, 72px);
   line-height: 0.92;
   letter-spacing: -0.05em;
   max-width: 900px;
   color: var(--white);
-  white-space: pre-line;
 }
+.hero__line {
+  display: block;
+  overflow: hidden;
+  padding: 0.04em 0 0.1em;
+  margin: -0.04em 0 -0.1em;
+}
+.hero__line-inner { display: block; }
 .hero__title .accent { color: var(--lime); }
 .hero__bottom {
   position: relative;
@@ -593,7 +601,6 @@ html.no-js .preloader { display: none; }
   transition: opacity 1s var(--ease), transform 1s var(--ease);
 }
 .js [data-hero="2"] { transition-delay: 0.12s; }
-.js [data-hero="3"] { transition-delay: 0.2s; }
 .js .hero__bottom > * {
   opacity: 0;
   transform: translateY(16px);

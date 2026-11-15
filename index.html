@@ -119,7 +119,10 @@
 
         <div class="hero__copy">
           <p class="hero__eyebrow secondary" data-hero="2" data-i18n="hero_eyebrow">(Shift Creative Studio)</p>
-          <h1 class="hero__title display" id="hero-title" data-hero="3"><span data-i18n="hero_title">Creativity that evolves.&#10;Design that connects</span><span class="accent">.</span></h1>
+          <h1 class="hero__title display" id="hero-title">
+            <span class="hero__line"><span class="hero__line-inner"><span data-i18n="hero_title_1">Creativity that evolves.</span></span></span>
+            <span class="hero__line"><span class="hero__line-inner"><span data-i18n="hero_title_2">Design that connects</span><span class="accent">.</span></span></span>
+          </h1>
         </div>
       </div>
 
@@ -337,7 +340,7 @@ My approach integrates creative thinking, visual execution and new technologies.
       <div class="manifesto__veil" aria-hidden="true"></div>
       <p class="manifesto__label secondary" data-i18n="manifesto_label">(About — Manifesto)</p>
       <div class="manifesto__content">
-        <h2 class="manifesto__title display" id="manifesto-title" data-reveal>
+        <h2 class="manifesto__title display" id="manifesto-title">
           <span class="manifesto__line"><span data-i18n="manifesto_1">Creative thinking.</span> <sup>*</sup></span>
           <span class="manifesto__line"><span data-i18n="manifesto_2">Technology that powers.</span> <sup>#</sup></span>
           <span class="manifesto__line manifesto__line--accent"><span data-i18n="manifesto_3">Design that solves.</span> <sup class="tm">™</sup></span>
@@ -522,6 +525,8 @@ My approach integrates creative thinking, visual execution and new technologies.
 
   <div class="cursor" id="cursor" aria-hidden="true"></div>
 
+  <script src="assets/js/vendor-gsap.min.js" defer></script>
+  <script src="assets/js/vendor-scrolltrigger.min.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
