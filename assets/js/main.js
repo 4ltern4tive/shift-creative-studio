@@ -706,9 +706,9 @@
       color: '210, 240, 138',
       alpha: 0.52,
       glow: 'rgba(210, 240, 138, 0.22)',
-      chars: '*#+/\\{}[]<>=~^©™$%&',
-      mutate: 5,
-      fps: 18
+      chars: '*#+/\\{}[]<>=~^©™%&',
+      mutate: 12,
+      fps: 24
     });
     createGlyphField($('#contact-canvas'), {
       cellW: 26,
