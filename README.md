@@ -35,4 +35,4 @@ Hosted on Cloudflare Pages — build command: *(none)*, build output directory: 
 
 ---
 
-©2026 SHIFT STUDIO. All rights reserved.
+©2027 SHIFT STUDIO. All rights reserved.
