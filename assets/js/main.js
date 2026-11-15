@@ -760,7 +760,7 @@
   const manifestoSection = $('#about');
   const manifestoTitleEl = $('#manifesto-title');
   const manifestoLineEls = manifestoTitleEl ? $$('.manifesto__line', manifestoTitleEl) : [];
-  const MANIFESTO_DIM = '#3a3a3a';
+  const MANIFESTO_DIM = '#666666';
   const MANIFESTO_LIGHT = '#f2f2ef';
   const MANIFESTO_LIME = '#d2f08a';
   const MANIFESTO_SUP = 'rgba(255, 255, 255, 0.82)';
@@ -904,7 +904,7 @@
      Language (EN / ES)
      ------------------------------------------------------------------------ */
 
-  const DEFAULT_LANG = 'en';
+  const DEFAULT_LANG = 'es';
   const SUPPORTED_LANGS = ['en', 'es'];
   const LANG_STORAGE_KEY = 'shift-studio-lang';
   let currentLang = DEFAULT_LANG;
@@ -916,7 +916,13 @@
       skip: 'Skip to content',
       descriptor: 'Shift Creative Studio',
       loading: 'Loading / 2026',
+      brand_home: 'SHIFT STUDIO — back to home',
+      nav_primary: 'Primary',
+      nav_mobile: 'Mobile',
+      menu_label: 'Menu',
       hero_eyebrow: '(Shift Creative Studio)',
+      hero_caption: 'BRUNO PÉREZ · SENIOR GRAPHIC & VISUAL DESIGNER',
+      hero_portrait_alt: 'Portrait of Bruno Pérez, founder of SHIFT STUDIO',
       hero_title_1: 'Creativity that evolves.',
       hero_title_2: 'Design that connects',
       scroll: 'Scroll down',
@@ -1019,6 +1025,10 @@
       footer_copy_2: 'ALL RIGHTS RESERVED.',
       footer_connect: '(Connect)',
       footer_descriptor: 'Independent Creative Studio — Montevideo, Uruguay',
+      footer_label: 'Footer',
+      socials_label: 'Social links',
+      connect_aria: 'Let’s connect — email SHIFT STUDIO',
+      plaque_aria: 'Montevideo, Uruguay. Working globally. UY, GMT-3.',
       back_to_top: 'Back to top',
       modal_request: 'Request case study',
       modal_prev: 'Previous',
@@ -1031,7 +1041,13 @@
       skip: 'Saltar al contenido',
       descriptor: 'Estudio Creativo',
       loading: 'Cargando / 2026',
+      brand_home: 'SHIFT STUDIO — volver al inicio',
+      nav_primary: 'Principal',
+      nav_mobile: 'Navegación móvil',
+      menu_label: 'Menú',
       hero_eyebrow: '(Estudio Creativo)',
+      hero_caption: 'BRUNO PÉREZ · DISEÑADOR GRÁFICO Y VISUAL SENIOR',
+      hero_portrait_alt: 'Retrato de Bruno Pérez, fundador de SHIFT STUDIO',
       hero_title_1: 'Creatividad que evoluciona.',
       hero_title_2: 'Diseño que conecta',
       scroll: 'Desplázate',
@@ -1134,6 +1150,10 @@
       footer_copy_2: 'TODOS LOS DERECHOS RESERVADOS.',
       footer_connect: '(Conectar)',
       footer_descriptor: 'Estudio Creativo — Montevideo, Uruguay',
+      footer_label: 'Pie de página',
+      socials_label: 'Redes sociales',
+      connect_aria: 'Conectemos — escribir a SHIFT STUDIO',
+      plaque_aria: 'Montevideo, Uruguay. Trabajando globalmente. UY, GMT-3.',
       back_to_top: 'Volver arriba',
       modal_request: 'Solicitar caso de estudio',
       modal_prev: 'Anterior',
