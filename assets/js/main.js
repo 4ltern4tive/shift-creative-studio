@@ -264,20 +264,22 @@
       provisional: true
     },
     {
-      id: 'pappolino',
+      id: 'fcr',
       index: '07',
-      name: 'PAPPOLINO',
-      category: 'Kidswear & Brand Communication',
+      name: 'FCR',
+      category: 'Game Design & Visual Identity',
       year: '—',
-      image: 'assets/img/pappolino-900.webp',
-      thumb: 'assets/img/pappolino-600.webp',
-      alt: 'Kidswear campaign and brand communication',
-      description: 'Kidswear identity and brand communication built for play — warm, clear and full of character.',
-      alt_es: 'Campaña de ropa infantil y comunicación de marca',
-      category_es: 'Ropa Infantil y Comunicación de Marca',
-      description_es: 'Identidad y comunicación de marca para ropa infantil pensada para jugar — cálida, clara y llena de carácter.',
-      link: null,
-      provisional: true
+      image: 'assets/img/fcr-1200.webp',
+      thumb: 'assets/img/fcr-700.webp',
+      alt: 'Football Cards Rivals — mobile football card battler, app screen during a live match',
+      description: 'Football Cards Rivals is the studio’s own football card battler — identity, card and interface design for a tactical fantasy football duel, live on Google Play.',
+      alt_es: 'Football Cards Rivals — videojuego de cartas de fútbol, pantalla del juego durante un partido en vivo',
+      category_es: 'Diseño de Juego e Identidad Visual',
+      description_es: 'Football Cards Rivals es el propio juego de cartas de fútbol del estudio — identidad, diseño de cartas y de interfaz para un duelo táctico de fútbol fantasía, disponible en Google Play.',
+      link: 'https://play.google.com/store/apps/details?id=com.footballcardsrivals.app',
+      link_label: 'View on Google Play',
+      link_label_es: 'Ver en Google Play',
+      provisional: false
     },
     {
       id: 'creative',
@@ -419,7 +421,7 @@
         modalLink.href = project.link;
         modalLink.target = '_blank';
         modalLink.rel = 'noopener noreferrer';
-        modalLinkLabel.textContent = isSpanish ? 'Ver en Behance' : 'View on Behance';
+        modalLinkLabel.textContent = (isSpanish ? project.link_label_es : project.link_label) || (isSpanish ? 'Ver en Behance' : 'View on Behance');
       } else {
         const subjectPrefix = isSpanish ? 'Solicitud de caso de estudio — ' : 'Case study request — ';
         modalLink.href = `mailto:studiounderart@gmail.com?subject=${encodeURIComponent(subjectPrefix + project.name)}`;
@@ -951,7 +953,7 @@
       work_cat_under: 'Visual Identity & Motion Design',
       work_cat_guapa: 'Fashion Campaigns & Visual Communication',
       work_cat_paprika: 'Packaging & Retail Design',
-      work_cat_pappolino: 'Kidswear & Brand Communication',
+      work_cat_fcr: 'Game Design & Visual Identity',
       work_cat_creative: 'Digital Design & Creative Exploration',
       year_unspecified: 'Year not specified',
       manifesto_label: '(About — Manifesto)',
@@ -1076,7 +1078,7 @@
       work_cat_under: 'Identidad Visual y Diseño en Movimiento',
       work_cat_guapa: 'Campañas de Moda y Comunicación Visual',
       work_cat_paprika: 'Diseño de Packaging y Retail',
-      work_cat_pappolino: 'Ropa Infantil y Comunicación de Marca',
+      work_cat_fcr: 'Diseño de Juego e Identidad Visual',
       work_cat_creative: 'Diseño Digital y Exploración Creativa',
       year_unspecified: 'Año no especificado',
       manifesto_label: '(Nosotros — Manifiesto)',
