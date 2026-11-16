@@ -720,17 +720,6 @@
       mutate: 12,
       fps: 24
     });
-    createGlyphField($('#contact-canvas'), {
-      cellW: 26,
-      cellH: 27,
-      fontSize: 11,
-      color: '255, 255, 255',
-      alpha: 0.22,
-      glow: 'rgba(210, 240, 138, 0.08)',
-      chars: '+#*/\\$%©',
-      mutate: 2,
-      fps: 12
-    });
   }
 
   /* ------------------------------------------------------------------------
