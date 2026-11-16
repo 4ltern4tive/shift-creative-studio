@@ -282,20 +282,22 @@
       provisional: false
     },
     {
-      id: 'creative',
+      id: 'grego',
       index: '08',
-      name: 'SHIFT CREATIVE',
-      category: 'Digital Design & Creative Exploration',
+      name: 'GREGO',
+      category: 'Brand & Menswear Design',
       year: '—',
-      image: 'assets/img/creative-1200.webp',
-      thumb: 'assets/img/creative-700.webp',
-      alt: 'Abstract digital design exploration in warm neutral, metallic and slate tones',
-      description: 'A space for digital design experiments, creative coding and AI-assisted explorations that push the studio’s visual language.',
-      alt_es: 'Exploración abstracta de diseño digital en tonos neutros cálidos, metálicos y pizarra',
-      category_es: 'Diseño Digital y Exploración Creativa',
-      description_es: 'Un espacio para experimentos de diseño digital, código creativo y exploraciones asistidas por IA que amplían el lenguaje visual del estudio.',
-      link: null,
-      provisional: true
+      image: 'assets/img/grego-1200.webp',
+      thumb: 'assets/img/grego-700.webp',
+      alt: 'GREGO menswear brand identity and visual system',
+      description: 'Brand identity and visual communication for GREGO, Guapa’s menswear line — from logo to campaign imagery.',
+      alt_es: 'Identidad de marca y sistema visual de GREGO, línea masculina de Guapa',
+      category_es: 'Diseño de Marca y Moda Masculina',
+      description_es: 'Identidad de marca y comunicación visual para GREGO, la línea masculina de Guapa — del logo a las piezas de campaña.',
+      link: 'https://www.guapa.com.uy/grego',
+      link_label: 'View on Guapa',
+      link_label_es: 'Ver en Guapa',
+      provisional: false
     }
   ];
 
@@ -954,7 +956,7 @@
       work_cat_guapa: 'Fashion Campaigns & Visual Communication',
       work_cat_paprika: 'Packaging & Retail Design',
       work_cat_fcr: 'Game Design & Visual Identity',
-      work_cat_creative: 'Digital Design & Creative Exploration',
+      work_cat_grego: 'Brand & Menswear Design',
       year_unspecified: 'Year not specified',
       manifesto_label: '(About — Manifesto)',
       manifesto_1: 'Creative thinking.',
@@ -1079,7 +1081,7 @@
       work_cat_guapa: 'Campañas de Moda y Comunicación Visual',
       work_cat_paprika: 'Diseño de Packaging y Retail',
       work_cat_fcr: 'Diseño de Juego e Identidad Visual',
-      work_cat_creative: 'Diseño Digital y Exploración Creativa',
+      work_cat_grego: 'Diseño de Marca y Moda Masculina',
       year_unspecified: 'Año no especificado',
       manifesto_label: '(Nosotros — Manifiesto)',
       manifesto_1: 'Pensamiento creativo.',
