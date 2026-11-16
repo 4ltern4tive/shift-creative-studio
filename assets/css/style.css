@@ -1131,7 +1131,7 @@ html.no-js .preloader { display: none; }
 .services {
   position: relative;
   overflow: hidden;
-  padding: clamp(90px, 10vw, 150px) var(--pad) 0 clamp(20px, 9vw, 130px);
+  padding: 0 var(--pad) 0 clamp(20px, 9vw, 130px);
   background: var(--bg);
 }
 .services__panel {
@@ -1820,7 +1820,7 @@ html.no-js .preloader { display: none; }
   .philosophy__signature { font-size: 20px; }
   .philosophy__portfolio { font-size: clamp(44px, 13.8vw, 92px); padding-top: 70px; }
   .philosophy__inner { min-height: calc(100svh - 100px); }
-  .services { padding-top: 92px; }
+  .services { padding-top: 40px; }
   .services__panel { padding: 22px 18px 24px; border-radius: 8px; }
   .services__topline { font-size: 8px; }
   .services__topline span:nth-child(2) { display: none; }

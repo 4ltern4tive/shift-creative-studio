@@ -853,6 +853,7 @@
     if (!window.gsap || !window.ScrollTrigger || reduceMotion.matches) return;
     const { gsap, ScrollTrigger } = window;
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
     manifestoEnhanced = true;
     manifestoWordTargets = splitManifestoWords();
 
@@ -872,7 +873,7 @@
             scrub: 0.5,
             pin: desktop,
             pinSpacing: desktop,
-            anticipatePin: desktop ? 1 : 0,
+            anticipatePin: 0,
             invalidateOnRefresh: true
           }
         });
@@ -887,6 +888,9 @@
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => ScrollTrigger.refresh());
     }
+    window.addEventListener('load', () => {
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    }, { once: true });
   }
 
   /* ------------------------------------------------------------------------
