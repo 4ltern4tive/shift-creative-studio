@@ -1300,19 +1300,26 @@ html.no-js .preloader { display: none; }
 }
 .services__wordmark-video {
   display: block;
-  width: 100%;
+  /* Bleed past the asymmetric services padding so the artwork reaches both viewport edges */
+  width: calc(100% + clamp(20px, 9vw, 130px) + var(--pad));
+  max-width: none;
   height: auto;
-  max-width: 100%;
   aspect-ratio: 2048 / 258;
   object-fit: contain;
-  /* Optically center the artwork on the page: offset half the services left inset */
-  transform: translateX(calc((var(--pad) - clamp(20px, 9vw, 130px)) / 2));
+  margin-left: calc(-1 * clamp(20px, 9vw, 130px));
+  margin-right: calc(-1 * var(--pad));
 }
 @media (max-width: 1024px) {
-  .services__wordmark-video { transform: translateX(calc((var(--pad) - clamp(20px, 6vw, 64px)) / 2)); }
+  .services__wordmark-video {
+    width: calc(100% + clamp(20px, 6vw, 64px) + var(--pad));
+    margin-left: calc(-1 * clamp(20px, 6vw, 64px));
+  }
 }
 @media (max-width: 900px) {
-  .services__wordmark-video { transform: translateX(0); }
+  .services__wordmark-video {
+    width: calc(100% + var(--pad) + var(--pad));
+    margin-left: calc(-1 * var(--pad));
+  }
 }
 .services__wordmark-static {
   display: none;
