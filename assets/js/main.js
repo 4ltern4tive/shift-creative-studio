@@ -298,6 +298,22 @@
       link_label: 'View on Guapa',
       link_label_es: 'Ver en Guapa',
       provisional: false
+    },
+    {
+      id: 'paysandu',
+      index: '09',
+      name: 'PAYSANDÚ',
+      category: 'Institutional Visual Identity',
+      year: '—',
+      image: 'assets/img/paysandu-1200.webp',
+      thumb: 'assets/img/paysandu-700.webp',
+      alt: 'PAYSANDÚ institutional visual identity, geometric interpretation of the mburucuyá flower',
+      description: 'Institutional visual identity for Paysandú, inspired by the mburucuyá flower. A geometric interpretation that combines nature, color and graphic synthesis to build a contemporary symbol of local identity.',
+      alt_es: 'Identidad visual institucional de Paysandú, interpretación geométrica de la flor de mburucuyá',
+      category_es: 'Identidad Visual Institucional',
+      description_es: 'Identidad visual institucional para Paysandú, inspirada en la flor de mburucuyá. Una interpretación geométrica que combina naturaleza, color y síntesis gráfica para construir un símbolo contemporáneo de identidad local.',
+      link: null,
+      provisional: true
     }
   ];
 
@@ -957,6 +973,7 @@
       work_cat_paprika: 'Packaging & Retail Design',
       work_cat_fcr: 'Game Design & Visual Identity',
       work_cat_grego: 'Brand & Menswear Design',
+      work_cat_paysandu: 'Institutional Visual Identity',
       year_unspecified: 'Year not specified',
       manifesto_label: '(About — Manifesto)',
       manifesto_1: 'Creative thinking.',
@@ -1080,6 +1097,7 @@
       work_cat_paprika: 'Diseño de Packaging y Retail',
       work_cat_fcr: 'Diseño de Juego e Identidad Visual',
       work_cat_grego: 'Diseño de Marca y Moda Masculina',
+      work_cat_paysandu: 'Identidad Visual Institucional',
       year_unspecified: 'Año no especificado',
       manifesto_label: '(Nosotros — Manifiesto)',
       manifesto_1: 'Pensamiento creativo.',
