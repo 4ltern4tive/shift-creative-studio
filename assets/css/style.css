@@ -1418,47 +1418,6 @@ html.no-js .preloader { display: none; }
 .contact__paren--left { left: 1.2vw; }
 .contact__paren--right { right: 1.2vw; }
 
-/* Connect band */
-.connect-band {
-  display: block;
-  overflow: hidden;
-  padding-block: 0.04em 0.09em;
-  background: var(--lime);
-  color: #111111;
-  border-block: 1px solid rgba(0, 0, 0, 0.12);
-  transition: background 0.35s ease;
-}
-.connect-band:hover { background: var(--lime-strong); }
-.connect-band__track {
-  display: flex;
-  width: max-content;
-  animation: connect-slide 34s linear infinite;
-  will-change: transform;
-}
-.connect-band:hover .connect-band__track { animation-play-state: paused; }
-.connect-band__group {
-  display: flex;
-  align-items: center;
-  flex: none;
-  padding-right: 0.32em;
-  font-size: clamp(62px, 10.3vw, 148px);
-  line-height: 1.03;
-  letter-spacing: -0.06em;
-  white-space: nowrap;
-}
-.connect-band__c {
-  font-size: 0.52em;
-  opacity: 0.55;
-  margin-inline: clamp(16px, 2.4vw, 38px);
-}
-.connect-band--footer {
-  margin: clamp(28px, 3.4vw, 46px) calc(-1 * var(--pad)) 0;
-}
-@keyframes connect-slide {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
-}
-
 /* ==========================================================================
    Footer
    ========================================================================== */
@@ -1480,6 +1439,66 @@ html.no-js .preloader { display: none; }
   height: auto;
   margin-bottom: 0;
 }
+.plaque {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.8vw, 24px);
+  width: 100%;
+  margin-top: clamp(18px, 2.2vw, 28px);
+  padding-block: clamp(11px, 1.2vw, 15px);
+  border-top: 1px solid rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.72);
+  font-family: var(--font-secondary);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  overflow: hidden;
+}
+.plaque__globe { display: flex; flex: none; color: var(--lime); }
+.plaque__globe svg { width: clamp(22px, 2.1vw, 28px); height: clamp(22px, 2.1vw, 28px); }
+.plaque__work {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.9vw, 27px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.plaque__barcode {
+  flex: 1 1 60px;
+  min-width: 36px;
+  height: clamp(24px, 2.8vw, 36px);
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255, 255, 255, 0.92) 0 2px,
+      transparent 2px 5px,
+      rgba(255, 255, 255, 0.92) 5px 6px,
+      transparent 6px 9px,
+      rgba(255, 255, 255, 0.92) 9px 13px,
+      transparent 13px 16px,
+      rgba(255, 255, 255, 0.92) 16px 17px,
+      transparent 17px 21px,
+      rgba(255, 255, 255, 0.92) 21px 26px,
+      transparent 26px 29px,
+      rgba(255, 255, 255, 0.92) 29px 30px,
+      transparent 30px 34px,
+      rgba(255, 255, 255, 0.92) 34px 39px,
+      transparent 39px 42px
+    );
+  opacity: 0.72;
+}
+.plaque__code {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex: none;
+  white-space: nowrap;
+  letter-spacing: 0.14em;
+}
+.plaque__code strong { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; }
+.plaque__code span { color: rgba(255, 255, 255, 0.55); }
 .site-footer__copyright {
   margin: 0;
   color: rgba(255, 255, 255, 0.42);
@@ -1817,8 +1836,8 @@ html.no-js .preloader { display: none; }
   .contact__paren--right { right: -6vw; }
   .contact__cta { margin-top: 34px; }
   .contact__email { font-size: 11px; }
-  .connect-band__group { font-size: clamp(56px, 15.5vw, 92px); }
   .site-footer { padding-top: 52px; }
+  .plaque { width: 100%; }
   .footer-socials { flex-wrap: wrap; gap: 18px 30px; }
   .site-footer__email { font-size: 14px; }
   .site-footer__bottom { flex-direction: column; align-items: flex-start; gap: 9px; margin-top: 18px; }
@@ -1855,6 +1874,12 @@ html.no-js .preloader { display: none; }
   .philosophy__portfolio { font-size: clamp(42px, 13.2vw, 60px); }
   .contact__title { font-size: clamp(30px, 9.2vw, 40px); }
   .footer-socials { gap: 16px 24px; }
+  .plaque { gap: 10px; }
+  .plaque__globe svg { width: 18px; height: 18px; }
+  .plaque__work { font-size: 15px; }
+  .plaque__barcode { height: 20px; min-width: 22px; }
+  .plaque__code { font-size: 9px; gap: 4px; letter-spacing: 0.1em; }
+  .plaque__code strong { font-size: 10px; }
 }
 
 /* ==========================================================================
@@ -1871,8 +1896,7 @@ html.no-js .preloader { display: none; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .marquee__track,
-  .connect-band__track { animation: none !important; }
+  .marquee__track { animation: none !important; }
   .work-preview { display: none; }
   .js [data-reveal],
   .js [data-hero],
