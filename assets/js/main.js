@@ -218,16 +218,16 @@
     {
       id: 'under',
       index: '04',
-      name: 'UNDER STUDIO',
+      name: 'UNDERART GAMES',
       category: 'Visual Identity & Motion Design',
       year: '2023',
       image: 'assets/img/under-800.webp',
       thumb: 'assets/img/under-640.webp',
-      alt: 'Under Studio visual identity and logo reveal',
-      description: 'A visual identity and logo reveal for a multidisciplinary studio, pairing a flexible mark with a restrained motion language.',
-      alt_es: 'Identidad visual y revelación de logo de Under Studio',
+      alt: 'Underart Games visual identity and logo reveal',
+      description: 'A visual identity and logo reveal for Underart Games, pairing a flexible mark with a restrained motion language.',
+      alt_es: 'Identidad visual y revelación de logo de Underart Games',
       category_es: 'Identidad Visual y Diseño en Movimiento',
-      description_es: 'Una identidad visual y revelación de logo para un estudio multidisciplinario, combinando una marca flexible con un lenguaje en movimiento contenido.',
+      description_es: 'Una identidad visual y revelación de logo para Underart Games, combinando una marca flexible con un lenguaje en movimiento contenido.',
       link: 'https://www.behance.net/gallery/173804805/Under-studio-Logo-Reveal',
       provisional: false
     },
@@ -235,15 +235,17 @@
       id: 'inhouse',
       index: '05',
       name: 'GUAPA & PAPRIKA',
-      category: 'In-House Experience',
+      category: 'Art Direction / Packaging / Campaigns / Retail',
       year: '—',
       image: 'assets/img/inhouse-1200.webp',
       thumb: 'assets/img/inhouse-700.webp',
-      alt: 'GUAPA & PAPRIKA — in-house experience in fashion campaigns, packaging and retail',
-      description: 'A single in-house experience case: campaigns, art direction, packaging and retail for Guapa and Paprika — from editorial strategy to the shelf.',
-      alt_es: 'GUAPA & PAPRIKA — experiencia in-house en campañas de moda, packaging y retail',
-      category_es: 'Experiencia In-House',
-      description_es: 'Un único caso de experiencia in-house: campañas, dirección de arte, packaging y retail para Guapa y Paprika — de la estrategia editorial a la góndola.',
+      thumbAlt: 'assets/img/inhouse-alt-700.webp',
+      gallery: ['assets/img/inhouse-1200.webp', 'assets/img/inhouse-alt-1200.webp'],
+      alt: 'GUAPA & PAPRIKA — Guapa fashion campaign and Paprika home textile imagery',
+      description: 'Broad in-house experience across fashion, home and retail brands, covering art direction, packaging, campaigns, digital content and point-of-sale communication. From creative concepts to print-ready production, combining visual consistency, technical expertise and AI-assisted workflows.',
+      alt_es: 'GUAPA & PAPRIKA — campaña de moda de Guapa e imagen textil de Paprika',
+      category_es: 'Dirección de Arte / Packaging / Campañas / Retail',
+      description_es: 'Amplia experiencia in-house en marcas de moda, hogar y retail, abarcando dirección de arte, packaging, campañas, contenido digital y comunicación en punto de venta. Desde los conceptos creativos hasta la producción lista para imprenta, combinando consistencia visual, experiencia técnica y flujos de trabajo asistidos por IA.',
       link: null,
       provisional: true
     },
@@ -271,16 +273,18 @@
       name: 'GREGO',
       category: 'Brand & Menswear Design',
       year: '—',
-      image: 'assets/img/grego-1200.webp',
-      thumb: 'assets/img/grego-700.webp',
-      alt: 'GREGO menswear brand identity and visual system',
+      image: 'assets/img/grego-campaign-1200.webp',
+      thumb: 'assets/img/grego-campaign-700.webp',
+      thumbAlt: 'assets/img/grego-700.webp',
+      alt: 'GREGO menswear campaign — model seated on a wall holding a GREGO shopping bag against a blue sky',
       description: 'Brand identity and visual communication for GREGO, Guapa’s menswear line — from logo to campaign imagery.',
-      alt_es: 'Identidad de marca y sistema visual de GREGO, línea masculina de Guapa',
+      alt_es: 'Campaña de GREGO, línea masculina de Guapa — modelo sentado con la bolsa de marca',
       category_es: 'Diseño de Marca y Moda Masculina',
       description_es: 'Identidad de marca y comunicación visual para GREGO, la línea masculina de Guapa — del logo a las piezas de campaña.',
       link: 'https://www.guapa.com.uy/grego',
       link_label: 'View on Guapa',
       link_label_es: 'Ver en Guapa',
+      gallery: ['assets/img/grego-campaign-1200.webp', 'assets/img/grego-1200.webp'],
       provisional: false
     },
     {
@@ -311,22 +315,64 @@
   const worksSection = $('.works');
   const preview = $('#work-preview');
   const previewImage = $('#work-preview-img');
+  const previewImageAlt = $('#work-preview-img-alt');
   const previewCaption = $('#work-preview-caption');
   let activeRow = null;
   let previewFrame = null;
   let previewX = 0;
   let previewY = 0;
+  let previewTimer = null;
+  let previewAltActive = false;
 
   const canPreview = () => finePointer.matches && window.innerWidth > 900 && !reduceMotion.matches;
 
+  function stopPreviewRotation() {
+    if (previewTimer) {
+      window.clearInterval(previewTimer);
+      previewTimer = null;
+    }
+    previewAltActive = false;
+    if (preview) preview.classList.remove('is-alt');
+  }
+
+  function resetPreviewLayers() {
+    if (!preview) return;
+    stopPreviewRotation();
+    preview.classList.add('is-reset');
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => preview.classList.remove('is-reset'));
+    });
+  }
+
+  function startPreviewRotation(row) {
+    if (!preview || !previewImageAlt || !row.dataset.imageAlt || previewTimer) return;
+    if (!activeRow || activeRow !== row) return;
+    previewTimer = window.setInterval(() => {
+      if (!activeRow || activeRow !== row || !preview) return;
+      previewAltActive = !previewAltActive;
+      preview.classList.toggle('is-alt', previewAltActive);
+    }, 2400);
+  }
+
   function setPreviewImage(row) {
     if (!preview || !previewImage || !activeRow) return;
+    resetPreviewLayers();
     const image = row.dataset.image;
     if (image && previewImage.getAttribute('src') !== image) previewImage.src = image;
     const projectIndex = projectMap.get(row.dataset.project);
     const project = PROJECTS[projectIndex];
     if (previewCaption && project) {
       previewCaption.textContent = `(${project.index}) — ${project.name}`;
+    }
+    if (!previewImageAlt) return;
+    const altImage = row.dataset.imageAlt;
+    if (!altImage) return;
+    if (previewImageAlt.getAttribute('src') !== altImage) previewImageAlt.src = altImage;
+    const start = () => startPreviewRotation(row);
+    if (previewImageAlt.decode) {
+      previewImageAlt.decode().then(start, start);
+    } else {
+      start();
     }
   }
 
@@ -345,6 +391,7 @@
   function hidePreview() {
     if (!preview) return;
     preview.classList.remove('is-active');
+    stopPreviewRotation();
     activeRow = null;
   }
 
@@ -363,7 +410,7 @@
       });
       row.addEventListener('focus', () => {
         // Keyboard users get the modal directly; the floating image is pointer-only.
-        if (preview) preview.classList.remove('is-active');
+        hidePreview();
       });
     });
     worksSection.addEventListener('mouseleave', hidePreview);
@@ -373,8 +420,10 @@
   // Preload thumbnails after load, when the browser is idle.
   const preloadThumbs = () => {
     PROJECTS.forEach((project) => {
-      const image = new Image();
-      image.src = project.thumb;
+      [project.thumb, project.thumbAlt].filter(Boolean).forEach((src) => {
+        const image = new Image();
+        image.src = src;
+      });
     });
   };
   window.addEventListener('load', () => {
@@ -391,6 +440,8 @@
 
   const dialog = $('#project-modal');
   const modalImage = $('#project-modal-image');
+  const modalImageAlt = $('#project-modal-image-alt');
+  const modalMedia = $('.project-modal__media');
   const modalIndex = $('#project-modal-index');
   const modalTitle = $('#project-modal-title');
   const modalCategory = $('#project-modal-category');
@@ -403,11 +454,58 @@
   const modalClose = $('.project-modal__close');
   let currentProject = 0;
   let lastFocused = null;
+  let modalGalleryTimer = null;
+  let modalGalleryActive = false;
+  let modalGalleryToken = 0;
+
+  const MODAL_GALLERY_INTERVAL = 5000;
+
+  function stopModalGallery() {
+    modalGalleryToken += 1;
+    if (modalGalleryTimer) {
+      window.clearInterval(modalGalleryTimer);
+      modalGalleryTimer = null;
+    }
+    modalGalleryActive = false;
+    if (modalMedia) modalMedia.classList.remove('is-alt');
+  }
+
+  function resetModalLayers() {
+    if (!modalMedia) return;
+    stopModalGallery();
+    modalMedia.classList.add('is-reset');
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => modalMedia.classList.remove('is-reset'));
+    });
+  }
+
+  function startModalGallery(project) {
+    if (!modalMedia || !modalImageAlt) return;
+    const images = Array.isArray(project.gallery) ? project.gallery : [];
+    const nextImage = images[1] || project.image;
+    if (modalImageAlt.getAttribute('src') !== nextImage) modalImageAlt.src = nextImage;
+    if (images.length < 2 || reduceMotion.matches) return;
+    const token = modalGalleryToken;
+    const start = () => {
+      if (token !== modalGalleryToken || modalGalleryTimer) return;
+      modalGalleryTimer = window.setInterval(() => {
+        if (!dialog || !dialog.open) return;
+        modalGalleryActive = !modalGalleryActive;
+        modalMedia.classList.toggle('is-alt', modalGalleryActive);
+      }, MODAL_GALLERY_INTERVAL);
+    };
+    if (modalImageAlt.decode) {
+      modalImageAlt.decode().then(start, start);
+    } else {
+      start();
+    }
+  }
 
   function updateModal(projectIndex) {
     const project = PROJECTS[projectIndex];
     if (!project || !dialog) return;
     const isSpanish = currentLang === 'es';
+    resetModalLayers();
     currentProject = projectIndex;
     if (modalIndex) modalIndex.textContent = `(${project.index} / ${String(PROJECTS.length).padStart(2, '0')})`;
     if (modalTitle) modalTitle.textContent = project.name;
@@ -418,6 +516,7 @@
       modalImage.src = project.image;
       modalImage.alt = (isSpanish && project.alt_es) ? project.alt_es : project.alt;
     }
+    startModalGallery(project);
     if (modalLink && modalLinkLabel) {
       if (project.link) {
         modalLink.href = project.link;
@@ -469,10 +568,12 @@
   if (dialog) {
     dialog.addEventListener('close', () => {
       document.documentElement.classList.remove('modal-open');
+      stopModalGallery();
       if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus({ preventScroll: true });
     });
     dialog.addEventListener('cancel', () => {
       document.documentElement.classList.remove('modal-open');
+      stopModalGallery();
     });
     dialog.addEventListener('click', (event) => {
       if (event.target !== dialog) return;
@@ -946,7 +1047,7 @@
       work_cat_puroarte: 'Art Direction & Poster Design',
       work_cat_logofolio: 'Brand Identity Collection',
       work_cat_under: 'Visual Identity & Motion Design',
-      work_cat_inhouse: 'In-House Experience',
+      work_cat_inhouse: 'Art Direction / Packaging / Campaigns / Retail',
       work_cat_fcr: 'Game Design & Visual Identity',
       work_cat_grego: 'Brand & Menswear Design',
       work_cat_paysandu: 'Institutional Visual Identity',
@@ -1069,7 +1170,7 @@
       work_cat_puroarte: 'Dirección de Arte y Diseño de Afiches',
       work_cat_logofolio: 'Colección de Identidad de Marca',
       work_cat_under: 'Identidad Visual y Diseño en Movimiento',
-      work_cat_inhouse: 'Experiencia In-House',
+      work_cat_inhouse: 'Dirección de Arte / Packaging / Campañas / Retail',
       work_cat_fcr: 'Diseño de Juego e Identidad Visual',
       work_cat_grego: 'Diseño de Marca y Moda Masculina',
       work_cat_paysandu: 'Identidad Visual Institucional',

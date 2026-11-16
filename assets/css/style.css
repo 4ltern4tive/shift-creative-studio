@@ -818,7 +818,18 @@ html.no-js .preloader { display: none; }
   will-change: transform, opacity;
 }
 .work-preview.is-active { opacity: 1; --s: 1; }
-.work-preview img { width: 100%; height: 100%; object-fit: cover; }
+.work-preview img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.7s ease;
+}
+.work-preview__img-alt { opacity: 0; }
+.work-preview.is-alt #work-preview-img { opacity: 0; }
+.work-preview.is-alt .work-preview__img-alt { opacity: 1; }
+.work-preview.is-reset img { transition: none; }
 .work-preview__dot {
   position: absolute;
   top: 12px; right: 12px;
@@ -1581,7 +1592,18 @@ html.no-js .preloader { display: none; }
   height: min(700px, 86svh);
 }
 .project-modal__media { position: relative; min-height: 0; background: #151515; }
-.project-modal__media img { width: 100%; height: 100%; object-fit: cover; }
+.project-modal__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.9s ease;
+}
+.project-modal__media img + img { opacity: 0; }
+.project-modal__media.is-alt img:first-child { opacity: 0; }
+.project-modal__media.is-alt img + img { opacity: 1; }
+.project-modal__media.is-reset img { transition: none; }
 .project-modal__body {
   display: flex;
   flex-direction: column;
