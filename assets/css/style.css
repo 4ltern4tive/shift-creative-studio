@@ -1632,9 +1632,10 @@ html.no-js .preloader { display: none; }
 .project-modal__meta span:last-child { color: var(--gray); flex: none; }
 .project-modal__desc {
   font-size: clamp(15px, 1.25vw, 17px);
-  line-height: 1.5;
+  line-height: 1.45;
   color: rgba(255, 255, 255, 0.64);
   max-width: 40ch;
+  white-space: pre-line;
 }
 .project-modal__link { align-self: flex-start; margin-top: auto; }
 .project-modal__nav {
