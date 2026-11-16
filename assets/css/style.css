@@ -1303,7 +1303,7 @@ html.no-js .preloader { display: none; }
   width: 100%;
   height: auto;
   max-width: 100%;
-  aspect-ratio: 2046 / 298;
+  aspect-ratio: 2048 / 258;
   object-fit: contain;
   /* Optically center the artwork on the page: offset half the services left inset */
   transform: translateX(calc((var(--pad) - clamp(20px, 9vw, 130px)) / 2));
